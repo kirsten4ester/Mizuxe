@@ -11,9 +11,9 @@
     <title>Bootstrap Theme</title>
 </head>
 
-<body>
+<body id="home" data-spy="scroll" data-target="#main-nav">
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-md navbar-light fixed-top py-4">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top py-4" id="main-nav">
         <div class="container">
             <a href="#home" class="navbar-brand">
                 <img src="img/mlogo.png" width="50" height="50" alt="logo">
@@ -75,7 +75,7 @@
                 </div>
                 <div class="col-md-4">
                     <button class="btn btn-primary btn-lg btn-block">
-                        <i class="fas fa-envelope-opfen-o"></i>Subscribe
+                        <i class="fas fa-envelope"></i> Subscribe
                     </button>
                 </div>
             </div>
@@ -339,19 +339,66 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </section>
 
+    <!-- CONTACT -->
+    <section id="contact" class="bg-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <h3>Get In Touch</h3>
+                    <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, similique.</p>
+                    <form>
+                        <div class="input-group input-group-lg mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Name">
+                        </div>
 
+                        <div class="input-group input-group-lg mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                            </div>
+                            <input type="email" class="form-control" placeholder="Email">
+                        </div>
 
+                        <div class="input-group input-group-lg mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </span>
+                            </div>
+                            <textarea class="form-control" placeholder="Message" rows="5"></textarea>
+                        </div>
+                        <input type="submit" value="Submit" class="btn btn-primary btn-block btn-lg">
+                    </form>
+                </div>
+                <div class="col-lg-3 align-self-center">
+                    <img src="img/mlogo.png" alt="logo" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
 
-
-
-
-
+    <!-- FOOTER -->
+    <footer id="main-footer" class="py-5 bg-primary text-white">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-6 ml-auto">
+                    <p class="lead">
+                        Copyright &copy; <span id="year"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 
 
@@ -366,7 +413,32 @@
 
     <script>
         // get the current year for the copyright
-        $('#year').text(new Date().getFullYear);
+        $('#year').text(new Date().getFullYear());
+
+        // init scrollspy
+        $('body').scrollspy({target: '#main-nav'});
+
+        // smoothscroll:
+        $('#main-nav a').on('click', function(e) {
+      // check for hash value
+      if(this.hash !== '') {
+        // prevent the default behavior of the a tag
+        e.preventDefault();
+
+        // store the hash in a variable
+        const hash = this.hash;
+
+        // animate the smooth scroll
+        $('html, body').animate({
+          scrollTop: $(hash).offset().top
+        }, 900, function() {
+          // add the hash to the URL after the scroll
+          window.location.hash = hash;
+        });
+      }
+    });
+
+
     </script>
 </body>
 
